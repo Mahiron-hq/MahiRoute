@@ -276,11 +276,12 @@ private fun HelperCard(state: UiModel, bootstrap: BootstrapState, actions: MainA
 private fun StartContent(state: UiModel, bootstrap: BootstrapState, actions: MainActions) {
     Text(stringResource(R.string.helper_title), style = MaterialTheme.typography.titleMedium)
     Text(stringResource(R.string.helper_body), style = MaterialTheme.typography.bodyMedium)
-    val problem = (bootstrap as? BootstrapState.Failed)?.problem
+    val failed = bootstrap as? BootstrapState.Failed
+    val problem = failed?.problem
     when {
         problem != null -> {
             Text(problemText(problem), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error)
-            (bootstrap as BootstrapState.Failed).detail?.takeIf { problem == Problem.Other || problem == Problem.Unreachable }?.let {
+            failed?.detail?.takeIf { problem == Problem.Other || problem == Problem.Unreachable }?.let {
                 Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }

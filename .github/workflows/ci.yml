@@ -30,7 +30,7 @@ jobs:
       run:
         working-directory: rust
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install build tools for BoringSSL
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends cmake clang libclang-dev
       - uses: dtolnay/rust-toolchain@master
@@ -56,12 +56,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
-      - uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v4
         with:
           packages: platform-tools platforms;android-36 build-tools;36.1.0 ndk;${{ env.NDK_VERSION }}
       - name: Install build tools for BoringSSL
@@ -75,7 +75,7 @@ jobs:
           workspaces: rust
       - name: Install cargo-ndk
         run: cargo install cargo-ndk --version "$CARGO_NDK_VERSION" --locked
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Unit tests, lint and debug build
         run: |
           export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$NDK_VERSION"

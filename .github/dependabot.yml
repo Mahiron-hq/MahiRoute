@@ -8,6 +8,14 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # These releases need Android Gradle plugin 9.1 or newer; remove the entries when the plugin is upgraded.
+      - dependency-name: "androidx.compose:compose-bom"
+      - dependency-name: "androidx.core:core-ktx"
+      - dependency-name: "com.android.application"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "gradle-wrapper"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: cargo
     directory: /rust
     schedule:

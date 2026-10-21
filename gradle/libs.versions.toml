@@ -5,9 +5,9 @@ composeBom = "2025.09.01"
 activityCompose = "1.11.0"
 coreKtx = "1.17.0"
 lifecycle = "2.9.4"
-coroutines = "1.10.2"
+coroutines = "1.11.0"
 junit = "4.13.2"
-orgJson = "20250517"
+orgJson = "20260814"
 
 [libraries]
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
