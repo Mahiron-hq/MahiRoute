@@ -1,6 +1,10 @@
+<div align="center">
+
 # MahiRoute
 
-**Choose the microphone and the sound output that every app on your Android phone uses.**
+**Choose the microphone and the sound output that every app on your Android phone uses**
+<br>
+**Выберите микрофон и вывод звука, которые используют все приложения вашего Android-телефона**
 
 [![CI](https://github.com/Mahiron-hq/MahiRoute/actions/workflows/ci.yml/badge.svg)](https://github.com/Mahiron-hq/MahiRoute/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/Mahiron-hq/MahiRoute)](https://github.com/Mahiron-hq/MahiRoute/releases/latest)
@@ -9,7 +13,15 @@
 [![Rust 1.95](https://img.shields.io/badge/rust-1.95-orange)](rust/Cargo.toml)
 [![Kotlin 2.2](https://img.shields.io/badge/kotlin-2.2-7f52ff)](gradle/libs.versions.toml)
 
-English | [Русский](#русский)
+**[English](#english)** · **[Русский](#русский)**
+
+</div>
+
+---
+
+<a id="english"></a>
+
+## 🇬🇧 English
 
 Plug in headphones without a microphone and Android silently moves your recording to the
 headset's (non-existent) microphone: voice messages and calls go quiet. MahiRoute lets you
@@ -20,6 +32,8 @@ No root, no virtual machines, no cloned apps: your own apps keep their accounts,
 notifications. A tiny helper started through Android's own wireless debugging changes the
 system audio routing, and MahiRoute checks with real test streams that Android obeyed.
 
+<div align="center">
+
 <table>
   <tr>
     <td><img src="docs/screenshots/main.png" alt="Main screen with a microphone and a speaker chosen" width="250"></td>
@@ -29,7 +43,9 @@ system audio routing, and MahiRoute checks with real test streams that Android o
   </tr>
 </table>
 
-## Features
+</div>
+
+### Features
 
 - **System-wide choice** of the microphone and of the sound output, for every app, live: the lists follow devices as they are plugged in and out.
 - **Verified, not assumed.** After applying a choice MahiRoute opens short test streams and shows "Apps use the chosen devices" only when Android really routed them there.
@@ -41,7 +57,7 @@ system audio routing, and MahiRoute checks with real test streams that Android o
 - **Phones without Wi-Fi.** A Windows launcher (`MahiRoute-start.bat`) starts the helper over USB: double-click, press Enter.
 - **Private.** No ads, no analytics, no accounts, nothing leaves your phone. English and Russian interface. Free software under the AGPL.
 
-## Install
+### Install
 
 Requirements: Android 12 (API 31) or newer on an arm64 phone. Verified on Android 13 (MIUI 14) and Android 16; the playback check needs Android 13.
 
@@ -49,7 +65,7 @@ Requirements: Android 12 (API 31) or newer on an arm64 phone. Verified on Androi
 2. Install the APK (allow installs from your browser or file manager when Android asks).
 3. Open MahiRoute and allow notifications, Bluetooth and the battery exemption when asked.
 
-### Start the helper (once per boot)
+#### Start the helper (once per boot)
 
 Android only lets the system choose audio devices, so MahiRoute starts a small helper with debugging rights. It needs a **Wi-Fi connection, but that network does not need internet access**: any router or another phone's hotspot works, even without a route to the internet.
 
@@ -60,11 +76,11 @@ Android only lets the system choose audio devices, so MahiRoute starts a small h
 
 On MIUI / HyperOS also allow autostart for MahiRoute (Security → Permissions → Autostart); otherwise open the app once after a reboot.
 
-### Phones without Wi-Fi
+#### Phones without Wi-Fi
 
 If the phone cannot join Wi-Fi (for example it shares its own connection), start the helper from a computer: on the helper card open **Start from a computer**, tap **Save the Windows file** (it lands in Downloads as `MahiRoute-start.bat`), copy it to the PC and double-click it while the phone is connected by USB with USB debugging on. It finds `adb`, waits for the phone, shows the command and asks you to press Enter. MahiRoute connects to the helper by itself. Without Windows run `adb shell sh /storage/emulated/0/Android/data/io.github.mahiron_hq.mahiroute/files/start-helper.sh`.
 
-## How it works
+### How it works
 
 ```
  MahiRoute app (Kotlin, Compose)
@@ -78,7 +94,7 @@ If the phone cannot join Wi-Fi (for example it shares its own connection), start
 
 The Rust engine decides what to apply (a preferred device per capture preset and product strategy, plus devices to hide), the helper applies it with shell rights, and test streams confirm the result. Details are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md); measurements on real phones and the reasons a PC or Wi-Fi is still needed are in [docs/FINDINGS.md](docs/FINDINGS.md).
 
-## Limitations
+### Limitations
 
 - Routing is system-wide, not per app.
 - Without root the helper can only be started through wireless debugging (needs Wi-Fi) or from a computer over USB, and again after every reboot of the phone.
@@ -88,7 +104,7 @@ The Rust engine decides what to apply (a preferred device per capture preset and
 - Bluetooth devices and USB DACs are not covered by the test devices below.
 - The app deliberately does not clone or virtualize other apps.
 
-## Verified on
+### Verified on
 
 | Check | Redmi Note 10S, Android 13 (MIUI 14) | Infinix X6855, Android 16 |
 |---|---|---|
@@ -103,7 +119,7 @@ The Rust engine decides what to apply (a preferred device per capture preset and
 | "Start after a restart" off: nothing runs after a reboot | yes | yes (checked by the maintainer) |
 | Unplug and replug of the chosen device (warning, close, restart, restore) | yes (protocol-level simulation) | warning and fallback to the system default (simulation) |
 
-## Build
+### Build
 
 Requirements: JDK 17, the Android SDK (platform 36, build-tools 36.1.0, NDK 29), Rust 1.95 with the `aarch64-linux-android` target, [`cargo-ndk`](https://github.com/bbqsrc/cargo-ndk) 4.1.2 and CMake (BoringSSL is built from source).
 
@@ -119,11 +135,11 @@ cargo build --all-targets && cargo test --all-features
 
 Release signing is read from the Gradle properties `RELEASE_STORE_FILE`, `RELEASE_STORE_PASSWORD`, `RELEASE_KEY_ALIAS` and `RELEASE_KEY_PASSWORD`. The layout of the repository is described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The JSON that Rust sends to the Kotlin UI is pinned by a golden file; after an intended change regenerate it with `UPDATE_GOLDEN=1 cargo test -p mahiroute-engine --test ui_contract`.
 
-## Privacy and security
+### Privacy and security
 
 MahiRoute collects nothing and sends nothing anywhere; see [PRIVACY.md](PRIVACY.md). Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## License
+### License
 
 MahiRoute is free software under the **GNU Affero General Public License, version 3 or (at your option) any later version**: see [LICENSE](LICENSE). Third-party components and their licenses are listed in [NOTICE](NOTICE) and [legal/](legal/).
 
@@ -133,17 +149,26 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 
 <a id="русский"></a>
 
-# MahiRoute по-русски
-
-**Выберите микрофон и вывод звука, которые используют все приложения вашего Android-телефона.**
-
-[English](#mahiroute) | Русский
+## 🇷🇺 Русский
 
 Подключили наушники без микрофона, и Android молча переключил запись на несуществующий микрофон гарнитуры: голосовые сообщения и звонки стали тихими. MahiRoute даёт выбрать самому: встроенный микрофон, USB- или Bluetooth-устройство, любой динамик или наушники, и все приложения (Telegram, Discord, диктофон, любые другие) следуют вашему выбору.
 
 Без root, без виртуальных машин и клонов: ваши приложения остаются со своими аккаунтами, данными и уведомлениями. Небольшой помощник, запущенный через штатную отладку Android по Wi-Fi, меняет системную маршрутизацию звука, а MahiRoute проверяет настоящими тестовыми потоками, что Android подчинился.
 
-## Возможности
+<div align="center">
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/main-ru.png" alt="Главный экран с выбранными микрофоном и динамиком" width="250"></td>
+    <td><img src="docs/screenshots/devices-ru.png" alt="Список устройств вывода звука" width="250"></td>
+    <td><img src="docs/screenshots/device-disconnected-ru.png" alt="Предупреждение после отключения выбранного устройства" width="250"></td>
+    <td><img src="docs/screenshots/diagnostics-ru.png" alt="Экран диагностики" width="250"></td>
+  </tr>
+</table>
+
+</div>
+
+### Возможности
 
 - **Системный выбор** микрофона и вывода звука для всех приложений, в реальном времени: списки следят за подключением и отключением устройств.
 - **Проверка, а не вера.** После применения выбора запускаются короткие тестовые потоки, и «Приложения используют выбранные устройства» появляется, только если Android действительно направил звук туда.
@@ -155,7 +180,7 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 - **Телефоны без Wi-Fi.** Файл для Windows `MahiRoute-start.bat` запускает помощника по USB: двойной щелчок и Enter.
 - **Приватность.** Без рекламы, аналитики и аккаунтов, ничего не уходит с телефона. Интерфейс на английском и русском. Свободное ПО под AGPL.
 
-## Установка
+### Установка
 
 Нужен Android 12 (API 31) или новее на arm64. Проверено на Android 13 (MIUI 14) и Android 16; проверка воспроизведения требует Android 13.
 
@@ -163,7 +188,7 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 2. Установите APK (разрешите установку из браузера или файлового менеджера, когда Android спросит).
 3. Откройте MahiRoute и разрешите уведомления, Bluetooth и работу без ограничений батареи.
 
-### Запуск помощника (один раз после каждой загрузки)
+#### Запуск помощника (один раз после каждой загрузки)
 
 Выбирать аудиоустройства Android разрешает только системе, поэтому MahiRoute запускает небольшого помощника с правами отладки. Нужно **подключение к Wi-Fi, но интернет в этой сети не нужен**: подойдёт любой роутер или точка доступа другого телефона, даже без выхода в интернет.
 
@@ -174,15 +199,15 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 
 На MIUI / HyperOS разрешите приложению автозапуск (Безопасность → Разрешения → Автозапуск); иначе после перезагрузки один раз откройте приложение.
 
-### Телефоны без Wi-Fi
+#### Телефоны без Wi-Fi
 
 Если телефон не может подключиться к Wi-Fi (например, сам раздаёт интернет), запустите помощника с компьютера: на карточке откройте **«Запуск с компьютера»**, нажмите **«Сохранить файл для Windows»** (он попадёт в «Загрузки» как `MahiRoute-start.bat`), скопируйте его на ПК и дважды щёлкните при подключённом по USB телефоне с включённой отладкой по USB. Файл найдёт `adb`, дождётся телефона, покажет команду и попросит нажать Enter. MahiRoute подключится к помощнику сам. Без Windows выполните `adb shell sh /storage/emulated/0/Android/data/io.github.mahiron_hq.mahiroute/files/start-helper.sh`.
 
-## Как это работает
+### Как это работает
 
 Движок на Rust решает, что применить (предпочтительное устройство для каждого типа записи и аудио-стратегии, плюс устройства, которые нужно скрыть), помощник с правами shell применяет это, а тестовые потоки подтверждают результат. Схема и подробности: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Замеры на реальных телефонах и причины, по которым всё ещё нужны Wi-Fi или ПК: [docs/FINDINGS.md](docs/FINDINGS.md).
 
-## Ограничения
+### Ограничения
 
 - Маршрутизация общая для всей системы, а не для отдельных приложений.
 - Без root помощника можно запустить только через отладку по Wi-Fi (нужен Wi-Fi) или с компьютера по USB, и заново после каждой перезагрузки телефона.
@@ -192,13 +217,30 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 - Bluetooth-устройства и USB-ЦАП тестовыми телефонами не покрыты.
 - Приложение намеренно не клонирует и не виртуализирует чужие приложения.
 
-## Проверено на
+### Проверено на
 
-См. таблицу в английском разделе выше (Redmi Note 10S на Android 13 с MIUI 14 и Infinix X6855 на Android 16).
+| Проверка | Redmi Note 10S, Android 13 (MIUI 14) | Infinix X6855, Android 16 |
+|---|---|---|
+| Запись следует выбранному микрофону | да | да |
+| Диктофон использует встроенный микрофон при подключённых наушниках | да | неприменимо (нет разъёма) |
+| В режиме звонка сохраняются выбранные микрофон и вывод; настоящие звонки | да | да, включая настоящие звонки (проверил автор) |
+| Воспроизведение следует выбранному выводу (медиа и звонок) | да | да |
+| Поведение прошивки | предпочтение записи игнорируется, скрытие работает | предпочтения учитываются |
+| Помощник стартует с телефона через отладку по Wi-Fi | да | нельзя проверить (телефон раздаёт интернет) |
+| Помощник запущен с ПК через `MahiRoute-start.bat`, приложение подключается само | да | да |
+| Помощник сам возвращается после перезагрузки, маршрут проверен | да | да (проверил автор) |
+| «Запускать после перезагрузки» выключено: после перезагрузки ничего не запускается | да | да (проверил автор) |
+| Отключение и возврат выбранного устройства (предупреждение, закрытие, перезапуск, восстановление) | да (симуляция на уровне протокола) | предупреждение и переход на системное по умолчанию (симуляция) |
 
-## Сборка, приватность, лицензия
+### Сборка
 
-Инструкция по сборке и тестам: раздел **Build** выше. Приватность: [PRIVACY.md](PRIVACY.md). Безопасность: [SECURITY.md](SECURITY.md). Участие в разработке: [CONTRIBUTING.md](CONTRIBUTING.md).
+Нужны JDK 17, Android SDK (platform 36, build-tools 36.1.0, NDK 29), Rust 1.95 с целью `aarch64-linux-android`, [`cargo-ndk`](https://github.com/bbqsrc/cargo-ndk) 4.1.2 и CMake (BoringSSL собирается из исходников). Команды сборки и проверок те же, что в английском разделе выше (**Build**); структура репозитория описана в [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+### Приватность и безопасность
+
+MahiRoute ничего не собирает и никуда не отправляет: см. [PRIVACY.md](PRIVACY.md). О уязвимостях сообщайте приватно, как описано в [SECURITY.md](SECURITY.md). Участие в разработке: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### Лицензия
 
 MahiRoute распространяется под **GNU Affero General Public License версии 3 или (по вашему выбору) любой более поздней**: см. [LICENSE](LICENSE). Сторонние компоненты и их лицензии перечислены в [NOTICE](NOTICE) и [legal/](legal/).
 
