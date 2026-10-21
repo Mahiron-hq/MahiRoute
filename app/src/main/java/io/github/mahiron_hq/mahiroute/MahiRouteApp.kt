@@ -4,11 +4,14 @@
 package io.github.mahiron_hq.mahiroute
 
 import android.app.Application
+import android.content.Context
 import io.github.mahiron_hq.mahiroute.bootstrap.AppForeground
 import io.github.mahiron_hq.mahiroute.bootstrap.AutoStarter
 import io.github.mahiron_hq.mahiroute.bootstrap.HelperEndpointStore
 import io.github.mahiron_hq.mahiroute.core.EngineHost
 import io.github.mahiron_hq.mahiroute.service.RoutingService
+import io.github.mahiron_hq.mahiroute.settings.AppSettings
+import io.github.mahiron_hq.mahiroute.settings.LocaleSupport
 import io.github.mahiron_hq.mahiroute.startup.StartupPolicy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +23,13 @@ import kotlinx.coroutines.launch
 class MahiRouteApp : Application() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleSupport.wrap(base))
+    }
+
     override fun onCreate() {
         super.onCreate()
+        AppSettings.load(this)
         StartupPolicy.load(this)
         AppForeground.register(this)
         EngineHost.start(this)

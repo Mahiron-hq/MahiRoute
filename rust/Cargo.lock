@@ -497,7 +497,7 @@ checksum = "f9f8bd3e56ce4dfc153cf470fffbfa98c7620958b312ca5c3a4b8d5181fd13c6"
 
 [[package]]
 name = "mahiroute-adb"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "base64",
  "boring",
@@ -511,7 +511,7 @@ dependencies = [
 
 [[package]]
 name = "mahiroute-core"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "proptest",
  "serde",
@@ -522,7 +522,7 @@ dependencies = [
 
 [[package]]
 name = "mahiroute-engine"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "mahiroute-core",
  "proptest",
@@ -534,7 +534,7 @@ dependencies = [
 
 [[package]]
 name = "mahiroute-jni"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "jni",
  "mahiroute-adb",

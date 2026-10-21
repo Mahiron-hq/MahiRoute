@@ -12,6 +12,7 @@ import android.content.Context
 import android.content.Intent
 import io.github.mahiron_hq.mahiroute.MainActivity
 import io.github.mahiron_hq.mahiroute.R
+import io.github.mahiron_hq.mahiroute.settings.AppSettings
 import io.github.mahiron_hq.mahiroute.core.Direction
 import io.github.mahiron_hq.mahiroute.core.UiModel
 import io.github.mahiron_hq.mahiroute.ui.DeviceLabels
@@ -117,6 +118,7 @@ object Notifications {
     }
 
     private fun notify(context: Context, id: Int, title: String, text: String) {
+        if (!AppSettings.alertsEnabled(context)) return
         ensureChannels(context)
         val notification =
             Notification.Builder(context, CHANNEL_ALERTS)

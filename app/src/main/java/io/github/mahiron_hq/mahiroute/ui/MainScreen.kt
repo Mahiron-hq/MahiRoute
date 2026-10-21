@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -82,6 +83,7 @@ class MainActions(
     val onCopy: (String) -> Unit,
     val onSaveLauncher: () -> Unit,
     val onOpenDiagnostics: () -> Unit,
+    val onOpenSettings: () -> Unit,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,6 +96,9 @@ fun MainScreen(state: UiModel, bootstrap: BootstrapState, startOnBoot: Boolean, 
                 actions = {
                     IconButton(onClick = actions.onOpenDiagnostics) {
                         Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.open_diagnostics))
+                    }
+                    IconButton(onClick = actions.onOpenSettings) {
+                        Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.open_settings))
                     }
                 },
             )

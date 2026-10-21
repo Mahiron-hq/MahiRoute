@@ -18,6 +18,7 @@ import io.github.mahiron_hq.mahiroute.core.EngineHost
 import io.github.mahiron_hq.mahiroute.core.Link
 import io.github.mahiron_hq.mahiroute.core.UiModel
 import io.github.mahiron_hq.mahiroute.notifications.Notifications
+import io.github.mahiron_hq.mahiroute.settings.LocaleSupport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -30,6 +31,10 @@ import kotlinx.coroutines.launch
  * and go, and tells the user when a chosen device disappears or returns.
  */
 class RoutingService : Service() {
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleSupport.wrap(newBase))
+    }
+
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private var previous: UiModel? = null
 

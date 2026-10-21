@@ -4,6 +4,19 @@ All notable changes to MahiRoute are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.2] - 2026-10-21
+
+### Added
+
+- Privacy notice inside the app: it is shown on the first start and again after a substantive change, and must be accepted before permissions are requested or the app can be used. It stays readable under Settings.
+- Settings screen: language (system, Russian, English), theme (system, light, dark), a switch for device alerts with a shortcut to the system notification settings, copying and sharing a diagnostics report without addresses or names, and a reset of choices and settings.
+- About screen with the version, the license, links to the source code, releases and issue tracker, and the third-party components.
+- Store guides for RuStore and Google Play with listing texts, permission explanations and known review risks.
+
+### Fixed
+
+- Open Dependabot pull requests are no longer left failing.
+
 ## [1.0.1] - 2026-10-21
 
 ### Fixed

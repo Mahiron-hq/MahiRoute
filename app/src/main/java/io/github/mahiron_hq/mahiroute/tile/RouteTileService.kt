@@ -3,6 +3,7 @@
 
 package io.github.mahiron_hq.mahiroute.tile
 
+import android.content.Context
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import io.github.mahiron_hq.mahiroute.R
@@ -10,6 +11,7 @@ import io.github.mahiron_hq.mahiroute.core.EngineHost
 import io.github.mahiron_hq.mahiroute.core.Link
 import io.github.mahiron_hq.mahiroute.core.Routing
 import io.github.mahiron_hq.mahiroute.core.UiModel
+import io.github.mahiron_hq.mahiroute.settings.LocaleSupport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,6 +20,10 @@ import kotlinx.coroutines.launch
 
 /** Quick Settings tile that switches the routing on and off without opening the app. */
 class RouteTileService : TileService() {
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleSupport.wrap(newBase))
+    }
+
     private val scope = CoroutineScope(Dispatchers.Main.immediate)
     private var job: Job? = null
 

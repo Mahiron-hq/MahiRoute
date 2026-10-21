@@ -55,13 +55,14 @@ system audio routing, and MahiRoute checks with real test streams that Android o
 - **Diagnostics screen:** helper state, Android version, how the firmware behaves, connected devices (including hidden ones) and the apps that play or record sound right now.
 - **Starts itself.** The helper starts through wireless debugging and comes back after a reboot. A switch lets you turn the start after a restart off.
 - **Phones without Wi-Fi.** A Windows launcher (`MahiRoute-start.bat`) starts the helper over USB: double-click, press Enter.
-- **Private.** No ads, no analytics, no accounts, nothing leaves your phone. English and Russian interface. Free software under the AGPL.
+- **Settings.** Language (system, Russian, English), theme, device alerts, a diagnostics report you can copy or share, and a reset.
+- **Private.** No ads, no analytics, no accounts, nothing leaves your phone. The privacy notice is shown in the app and accepted on the first start. Free software under the AGPL.
 
 ### Install
 
 Requirements: Android 12 (API 31) or newer on an arm64 phone. Verified on Android 13 (MIUI 14) and Android 16; the playback check needs Android 13.
 
-1. Download `MahiRoute-1.0.1.apk` and `SHA256SUMS.txt` from the [latest release](https://github.com/Mahiron-hq/MahiRoute/releases/latest) and compare the checksum: `sha256sum -c SHA256SUMS.txt`.
+1. Download `MahiRoute-1.0.2.apk` and `SHA256SUMS.txt` from the [latest release](https://github.com/Mahiron-hq/MahiRoute/releases/latest) and compare the checksum: `sha256sum -c SHA256SUMS.txt`.
 2. Install the APK (allow installs from your browser or file manager when Android asks).
 3. Open MahiRoute and allow notifications, Bluetooth and the battery exemption when asked.
 
@@ -112,7 +113,7 @@ The Rust engine decides what to apply (a preferred device per capture preset and
 | Call mode keeps the chosen microphone and output, including real calls | yes | yes |
 | Playback follows the chosen output (media and call) | yes | yes |
 | Firmware behavior | capture preference ignored, hiding works | preferences honored |
-| Helper starts from the phone through wireless debugging | yes | not applicable |
+| Helper starts from the phone through wireless debugging | yes | yes |
 | Helper started from a PC by `MahiRoute-start.bat`, app connects by itself | yes | yes |
 | Helper returns by itself after a reboot, routing verified | yes | yes |
 | "Start after a restart" off: nothing runs after a reboot | yes | yes |
@@ -164,13 +165,14 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 - **Диагностика:** состояние помощника, версия Android, поведение прошивки, подключённые устройства (в том числе скрытые) и приложения, которые сейчас играют или пишут звук.
 - **Запускается само.** Помощник стартует через отладку по Wi-Fi и возвращается после перезагрузки. Переключатель позволяет выключить запуск после перезагрузки.
 - **Телефоны без Wi-Fi.** Файл для Windows `MahiRoute-start.bat` запускает помощника по USB: двойной щелчок и Enter.
-- **Приватность.** Без рекламы, аналитики и аккаунтов, ничего не уходит с телефона. Интерфейс на английском и русском. Свободное ПО под AGPL.
+- **Настройки.** Язык (системный, русский, английский), тема, оповещения об устройствах, отчёт диагностики, который можно скопировать или отправить, и сброс.
+- **Приватность.** Без рекламы, аналитики и аккаунтов, ничего не уходит с телефона. Политика конфиденциальности показывается в приложении и принимается при первом запуске. Свободное ПО под AGPL.
 
 ### Установка
 
 Нужен Android 12 (API 31) или новее на arm64. Проверено на Android 13 (MIUI 14) и Android 16; проверка воспроизведения требует Android 13.
 
-1. Скачайте `MahiRoute-1.0.1.apk` и `SHA256SUMS.txt` из [последнего релиза](https://github.com/Mahiron-hq/MahiRoute/releases/latest) и сверьте сумму: `sha256sum -c SHA256SUMS.txt`.
+1. Скачайте `MahiRoute-1.0.2.apk` и `SHA256SUMS.txt` из [последнего релиза](https://github.com/Mahiron-hq/MahiRoute/releases/latest) и сверьте сумму: `sha256sum -c SHA256SUMS.txt`.
 2. Установите APK (разрешите установку из браузера или файлового менеджера, когда Android спросит).
 3. Откройте MahiRoute и разрешите уведомления, Bluetooth и работу без ограничений батареи.
 
@@ -211,7 +213,7 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 | В режиме звонка сохраняются выбранные микрофон и вывод, включая настоящие звонки | да | да |
 | Воспроизведение следует выбранному выводу (медиа и звонок) | да | да |
 | Поведение прошивки | предпочтение записи игнорируется, скрытие работает | предпочтения учитываются |
-| Помощник стартует с телефона через отладку по Wi-Fi | да | неприменимо |
+| Помощник стартует с телефона через отладку по Wi-Fi | да | да |
 | Помощник запущен с ПК через `MahiRoute-start.bat`, приложение подключается само | да | да |
 | Помощник сам возвращается после перезагрузки, маршрут проверен | да | да |
 | «Запускать после перезагрузки» выключено: после перезагрузки ничего не запускается | да | да |

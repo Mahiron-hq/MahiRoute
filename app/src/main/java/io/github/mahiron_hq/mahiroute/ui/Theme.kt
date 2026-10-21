@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp
+import io.github.mahiron_hq.mahiroute.settings.ThemeMode
 
 private val shapes =
     Shapes(
@@ -22,8 +23,14 @@ private val shapes =
 
 /** Material 3 theme with wallpaper-based colors (minSdk 31 always supports them). */
 @Composable
-fun MahiRouteTheme(content: @Composable () -> Unit) {
+fun MahiRouteTheme(mode: ThemeMode = ThemeMode.System, content: @Composable () -> Unit) {
     val context = LocalContext.current
-    val scheme = if (isSystemInDarkTheme()) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    val dark =
+        when (mode) {
+            ThemeMode.System -> isSystemInDarkTheme()
+            ThemeMode.Light -> false
+            ThemeMode.Dark -> true
+        }
+    val scheme = if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     MaterialTheme(colorScheme = scheme, shapes = shapes, content = content)
 }
