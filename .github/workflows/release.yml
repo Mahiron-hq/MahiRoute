@@ -52,7 +52,7 @@ jobs:
           workspaces: rust
       - name: Install cargo-ndk
         run: cargo install cargo-ndk --version "$CARGO_NDK_VERSION" --locked
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Read the app version
         id: version
         run: |
