@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MahiRoute</string>
+
+    <!-- Main screen -->
+    <string name="label_input">Микрофон</string>
+    <string name="label_output">Вывод звука</string>
+    <string name="option_system_default">Системное по умолчанию</string>
+    <string name="device_hidden_note">%1$s · скрыто от Android, пока выбрано другое</string>
+    <string name="switch_enabled">Маршрутизация включена</string>
+    <string name="switch_disabled">Маршрутизация выключена</string>
+    <string name="switch_enabled_hint_on">Приложения используют выбранные ниже устройства</string>
+    <string name="switch_enabled_hint_off">Устройства для приложений выбирает Android</string>
+    <string name="routing_inactive">Устройства выбирает сама система</string>
+    <string name="routing_applying">Применяю…</string>
+    <string name="routing_verifying">Проверяю результат…</string>
+    <string name="routing_verified">Приложения используют выбранные устройства</string>
+    <string name="routing_unverified">Применено, но проверка не завершилась</string>
+    <string name="routing_failed_input">Android не последовал выбору микрофона</string>
+    <string name="routing_failed_output">Android не последовал выбору вывода звука</string>
+    <string name="missing_input">Микрофон «%1$s» отключён. Пока его нет, микрофон выбирает Android. MahiRoute запомнил ваш выбор и применит его снова, когда устройство подключат.</string>
+    <string name="missing_output">Вывод звука «%1$s» отключён. Пока его нет, вывод выбирает Android. MahiRoute запомнил ваш выбор и применит его снова, когда устройство подключат.</string>
+    <string name="open_diagnostics">Диагностика</string>
+    <string name="back">Назад</string>
+
+    <!-- Helper -->
+    <string name="helper_title">Помощник не запущен</string>
+    <string name="helper_body">Выбирать аудиоустройства Android разрешает только системе. MahiRoute запускает небольшого помощника с правами отладки, чтобы это изменить. Нужно только подключение к Wi-Fi, а интернет в этой сети не нужен: подойдёт любая сеть, даже без выхода в интернет. Wi-Fi нужен лишь для запуска; дальше помощник работает без сети до перезагрузки телефона.</string>
+    <string name="helper_connecting">Подключаюсь к помощнику…</string>
+    <string name="helper_start">Запустить помощника</string>
+    <string name="helper_failed">Не удаётся связаться с помощником: %1$s</string>
+    <string name="pc_toggle">Запуск с компьютера (без Wi-Fi)</string>
+    <string name="pc_hint">Сохраните файл для Windows, перенесите его на компьютер и запустите двойным щелчком при подключённом по USB телефоне с включённой отладкой по USB. Файл сам найдёт adb, дождётся телефона и попросит нажать Enter. Приложение подключится к помощнику само.</string>
+    <string name="pc_save_launcher">Сохранить файл для Windows</string>
+    <string name="pc_launcher_saved">Файл MahiRoute-start.bat сохранён в папку «Загрузки»</string>
+    <string name="pc_launcher_failed">Не удалось сохранить файл</string>
+    <string name="pc_manual_hint">Или выполните команду на компьютере вручную:</string>
+    <string name="pc_copy">Скопировать</string>
+    <string name="pc_connect">Подключиться сейчас</string>
+    <string name="helper_step_preparing">Подготовка…</string>
+    <string name="helper_step_finding">Ищу отладку по Wi-Fi…</string>
+    <string name="helper_step_debugging">Включите «Отладку по Wi-Fi» в настройках для разработчиков. Дальше всё продолжится само.</string>
+    <string name="helper_step_confirm">Если Android спросил, разрешите отладку по Wi-Fi в этой сети. Жду вашего ответа…</string>
+    <string name="helper_step_starting">Запускаю помощника…</string>
+    <string name="helper_step_dialog">Жду окно сопряжения…</string>
+    <string name="helper_step_pairing">Сопрягаюсь…</string>
+    <string name="pair_title">Сопряжение MahiRoute с этим телефоном</string>
+    <string name="pair_instructions">1. Откройте «Для разработчиков» → «Отладка по Wi-Fi».
+2. Нажмите «Подключить устройство с помощью кода».
+3. Введите шесть цифр оттуда ниже или в уведомлении. Это нужно сделать один раз.</string>
+    <string name="pair_code_hint">Код сопряжения</string>
+    <string name="pair_submit">Сопрячь</string>
+    <string name="pair_open_settings">Открыть «Для разработчиков»</string>
+    <string name="pair_wrong_code">Код не подошёл. Проверьте цифры в окне и попробуйте снова.</string>
+    <string name="pair_dialog_missing">Окно сопряжения не найдено. Не закрывайте его, пока идёт сопряжение.</string>
+    <string name="problem_no_wifi">Сначала подключитесь к Wi-Fi: отладка по сети работает только через Wi-Fi. Интернет в этой сети не нужен, подойдёт любая сеть, даже без выхода в интернет. Wi-Fi нужен лишь для запуска помощника.</string>
+    <string name="problem_debugging_off">Включите «Отладку по Wi-Fi» в настройках для разработчиков и повторите.</string>
+    <string name="problem_not_found">Отладка по Wi-Fi не обнаружена. Убедитесь, что она включена, телефон подключён к Wi-Fi (интернет в сети не нужен) и вы разрешили отладку в этой сети, когда Android спросил.</string>
+    <string name="problem_unreachable">Служба отладки по Wi-Fi не отвечает.</string>
+    <string name="problem_other">Не удалось запустить помощника.</string>
+    <string name="notif_pair_title">Введите код сопряжения</string>
+    <string name="notif_pair_text">Введите шесть цифр из окна отладки по Wi-Fi.</string>
+    <string name="notif_pair_action">Ввести код</string>
+
+    <!-- Settings -->
+    <string name="setting_boot_title">Запускать после перезагрузки</string>
+    <string name="setting_boot_hint_on">После перезагрузки телефона MahiRoute сам вернёт выбранные устройства.</string>
+    <string name="setting_boot_hint_off">После перезагрузки MahiRoute ничего не делает, пока вы не откроете приложение.</string>
+    <string name="cancel">Отмена</string>
+    <string name="close">Закрыть</string>
+
+    <!-- Diagnostics -->
+    <string name="diag_title">Диагностика</string>
+    <string name="diag_helper">Помощник</string>
+    <string name="diag_firmware">Android %1$s (API %2$d)</string>
+    <string name="diag_link_ready">Работает</string>
+    <string name="diag_link_connecting">Подключение</string>
+    <string name="diag_link_disconnected">Не запущен</string>
+    <string name="diag_link_failed">Ошибка: %1$s</string>
+    <string name="diag_capabilities">Как ведёт себя эта прошивка</string>
+    <string name="diag_capture_preset">Предпочтение микрофона</string>
+    <string name="diag_output_strategy">Предпочтение вывода</string>
+    <string name="support_unknown">ещё не измерено</string>
+    <string name="support_honored">учитывается</string>
+    <string name="support_ignored">игнорируется, вместо этого устройства скрываются</string>
+    <string name="diag_streams">Активные аудиопотоки</string>
+    <string name="diag_no_streams">Сейчас никто не записывает и не воспроизводит звук</string>
+    <string name="diag_devices">Подключённые устройства</string>
+    <string name="diag_warnings">Недавние проблемы</string>
+    <string name="diag_recalibrate">Измерить заново</string>
+    <string name="stream_record">Запись</string>
+    <string name="stream_playback">Воспроизведение</string>
+    <string name="stream_to">→ %1$s</string>
+    <string name="stream_unknown_device">устройство неизвестно</string>
+    <string name="mode_normal">обычный</string>
+    <string name="mode_ringtone">звонок</string>
+    <string name="mode_call">вызов</string>
+    <string name="mode_communication">голосовой или видеочат</string>
+    <string name="diag_mode">Режим звука: %1$s</string>
+    <string name="uid_unknown">неизвестное приложение</string>
+
+    <!-- Permissions -->
+    <string name="perm_title">Нужно разрешение</string>
+    <string name="perm_notifications">MahiRoute показывает уведомление, пока управляет звуком, и сообщает, когда выбранное устройство отключилось.</string>
+    <string name="perm_bluetooth">Доступ к Bluetooth нужен, чтобы показывать ваши Bluetooth-гарнитуры и замечать их подключение.</string>
+    <string name="perm_battery">Android может остановить MahiRoute в фоне. Разрешите работу без ограничений батареи, чтобы маршрутизация не прерывалась.</string>
+    <string name="perm_grant">Разрешить</string>
+    <string name="perm_open_settings">Открыть настройки</string>
+    <string name="perm_later">Не сейчас</string>
+
+    <!-- Notifications -->
+    <string name="channel_status">Состояние</string>
+    <string name="channel_alerts">Оповещения об устройствах</string>
+    <string name="notif_status_title">MahiRoute управляет звуком</string>
+    <string name="notif_status_text">Микрофон: %1$s · Вывод: %2$s</string>
+    <string name="notif_action_off">Выключить</string>
+    <string name="notif_missing_title">Выбранное устройство отключено</string>
+    <string name="notif_missing_text">Пока оно не вернётся, для %1$s Android использует свой выбор.</string>
+    <string name="notif_restored_title">Выбранное устройство снова подключено</string>
+    <string name="notif_restored_text">MahiRoute снова применил ваш выбор для %1$s.</string>
+    <string name="notif_helper_lost_title">Помощник остановился</string>
+    <string name="notif_helper_lost_text">Откройте MahiRoute, чтобы запустить его снова; до тех пор устройства выбирает Android.</string>
+    <string name="direction_input">микрофона</string>
+    <string name="direction_output">вывода звука</string>
+    <string name="tile_label">Маршрутизация</string>
+
+    <!-- Device kinds -->
+    <string name="kind_builtin_earpiece">Разговорный динамик</string>
+    <string name="kind_builtin_speaker">Динамик телефона</string>
+    <string name="kind_builtin_speaker_safe">Динамик телефона (защищённый)</string>
+    <string name="kind_builtin_mic">Встроенный микрофон</string>
+    <string name="kind_wired_headset">Проводная гарнитура</string>
+    <string name="kind_wired_headphones">Проводные наушники</string>
+    <string name="kind_line_analog">Аналоговый линейный выход</string>
+    <string name="kind_line_digital">Цифровой линейный выход</string>
+    <string name="kind_usb_headset">USB-гарнитура</string>
+    <string name="kind_usb_device">USB-аудиоустройство</string>
+    <string name="kind_usb_accessory">USB-аксессуар</string>
+    <string name="kind_bluetooth_sco">Bluetooth-гарнитура (звонки)</string>
+    <string name="kind_bluetooth_a2dp">Bluetooth-наушники</string>
+    <string name="kind_ble_headset">Bluetooth LE-гарнитура</string>
+    <string name="kind_ble_speaker">Bluetooth LE-колонка</string>
+    <string name="kind_ble_broadcast">Bluetooth LE-трансляция</string>
+    <string name="kind_hearing_aid">Слуховой аппарат</string>
+    <string name="kind_hdmi">HDMI</string>
+    <string name="kind_dock">Док-станция</string>
+    <string name="kind_aux_line">Aux-линия</string>
+    <string name="kind_virtual">Системный порт</string>
+    <string name="position_bottom">нижний</string>
+    <string name="position_back">задний</string>
+    <string name="position_front">передний</string>
+    <string name="position_top">верхний</string>
+    <string name="device_with_detail">%1$s · %2$s</string>
+</resources>

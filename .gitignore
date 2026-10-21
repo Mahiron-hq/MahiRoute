@@ -1,0 +1,23 @@
+# Gradle and Android Studio
+.gradle/
+.kotlin/
+build/
+.cxx/
+.idea/
+*.iml
+local.properties
+captures/
+
+# Rust
+/rust/target/
+
+# Native libraries produced by the Rust build
+/app/src/main/jniLibs/
+
+# Packages
+*.apk
+*.aab
+
+# Operating system files
+.DS_Store
+Thumbs.db

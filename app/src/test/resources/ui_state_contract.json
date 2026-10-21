@@ -1,0 +1,106 @@
+{
+  "link": {
+    "state": "ready"
+  },
+  "sdk": 33,
+  "enabled": true,
+  "selection": {
+    "enabled": true,
+    "input": {
+      "kind": "device",
+      "device": {
+        "direction": "input",
+        "kind": "builtin_mic",
+        "address": "bottom"
+      }
+    },
+    "output": {
+      "kind": "device",
+      "device": {
+        "direction": "output",
+        "kind": "bluetooth_a2dp",
+        "address": "AA:BB:CC:DD:EE:FF"
+      }
+    }
+  },
+  "devices": [
+    {
+      "port": 17,
+      "direction": "input",
+      "kind": "builtin_mic",
+      "android_type": 15,
+      "address": "back",
+      "name": "Test phone",
+      "masked": false
+    },
+    {
+      "port": 16,
+      "direction": "input",
+      "kind": "builtin_mic",
+      "android_type": 15,
+      "address": "bottom",
+      "name": "Test phone",
+      "masked": false
+    },
+    {
+      "port": 2147483648,
+      "direction": "input",
+      "kind": "wired_headset",
+      "android_type": 3,
+      "address": "",
+      "name": "Test phone",
+      "masked": true
+    },
+    {
+      "port": 3,
+      "direction": "output",
+      "kind": "builtin_speaker",
+      "android_type": 2,
+      "address": "",
+      "name": "Test phone",
+      "masked": false
+    },
+    {
+      "port": 1268,
+      "direction": "output",
+      "kind": "wired_headset",
+      "android_type": 3,
+      "address": "",
+      "name": "Test phone",
+      "masked": false
+    }
+  ],
+  "missing": [
+    "output"
+  ],
+  "dismissed_missing": [
+    "output"
+  ],
+  "routing": {
+    "state": "applying"
+  },
+  "capabilities": {
+    "capture_preset": "ignored",
+    "output_strategy": "honored"
+  },
+  "streams": [
+    {
+      "kind": "record",
+      "uid": 10169,
+      "source": 7,
+      "device_port": 16,
+      "device_type": 15
+    },
+    {
+      "kind": "playback",
+      "uid": 10201,
+      "source": 2,
+      "device_port": null,
+      "device_type": null
+    }
+  ],
+  "mode": 3,
+  "warnings": [
+    "unexpected helper response 99"
+  ]
+}

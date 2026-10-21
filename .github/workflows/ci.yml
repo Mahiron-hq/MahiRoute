@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Lev Burmistrov (Mahiron-hq)
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RUST_VERSION: 1.95.0
+  CARGO_NDK_VERSION: 4.1.2
+  NDK_VERSION: 29.0.14206865
+
+jobs:
+  rust:
+    name: Rust engine
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build tools for BoringSSL
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends cmake clang libclang-dev
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - name: Format
+        run: cargo fmt --check
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+      - name: Build without warnings
+        run: cargo build --all-targets
+        env:
+          RUSTFLAGS: -D warnings
+      - name: Test
+        run: cargo test --all-features
+
+  android:
+    name: Android app
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools platforms;android-36 build-tools;36.1.0 ndk;${{ env.NDK_VERSION }}
+      - name: Install build tools for BoringSSL
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends cmake clang libclang-dev
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          targets: aarch64-linux-android
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - name: Install cargo-ndk
+        run: cargo install cargo-ndk --version "$CARGO_NDK_VERSION" --locked
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Unit tests, lint and debug build
+        run: |
+          export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$NDK_VERSION"
+          ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug

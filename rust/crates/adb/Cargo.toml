@@ -1,0 +1,25 @@
+[package]
+name = "mahiroute-adb"
+description = "Minimal ADB client: wireless-debugging pairing and shell commands over TLS"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+base64 = "0.23.1"
+boring = "5"
+boring-sys = "5"
+hkdf = "0.13.0"
+sha2 = "0.11.1"
+thiserror.workspace = true
+
+[dev-dependencies]
+proptest.workspace = true
+tempfile = "3.20"
+
+[lints]
+workspace = true

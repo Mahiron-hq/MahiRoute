@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MahiRoute</string>
+
+    <!-- Main screen -->
+    <string name="label_input">Microphone</string>
+    <string name="label_output">Sound output</string>
+    <string name="option_system_default">System default</string>
+    <string name="device_hidden_note">%1$s · hidden from Android while selected</string>
+    <string name="switch_enabled">Routing is on</string>
+    <string name="switch_disabled">Routing is off</string>
+    <string name="switch_enabled_hint_on">Apps use the devices you chose below</string>
+    <string name="switch_enabled_hint_off">Android decides which devices apps use</string>
+    <string name="routing_inactive">Android picks the devices on its own</string>
+    <string name="routing_applying">Applying…</string>
+    <string name="routing_verifying">Checking the result…</string>
+    <string name="routing_verified">Apps use the chosen devices</string>
+    <string name="routing_unverified">Applied, but the check could not finish</string>
+    <string name="routing_failed_input">Android did not follow the microphone choice</string>
+    <string name="routing_failed_output">Android did not follow the sound output choice</string>
+    <string name="missing_input">The microphone \"%1$s\" is disconnected. Android picks the microphone until it comes back. MahiRoute remembers your choice and applies it again when the device is reconnected.</string>
+    <string name="missing_output">The sound output \"%1$s\" is disconnected. Android picks the output until it comes back. MahiRoute remembers your choice and applies it again when the device is reconnected.</string>
+    <string name="open_diagnostics">Diagnostics</string>
+    <string name="back">Back</string>
+
+    <!-- Helper -->
+    <string name="helper_title">Helper is not running</string>
+    <string name="helper_body">Android only lets the system choose audio devices. MahiRoute starts a small helper with debugging rights to change that. It only needs a Wi-Fi connection, and that network does not need internet access: any network works, even one without a route to the internet. Wi-Fi is needed just to start; once running the helper works offline until the phone restarts.</string>
+    <string name="helper_connecting">Connecting to the helper…</string>
+    <string name="helper_start">Start helper</string>
+    <string name="helper_failed">Cannot reach the helper: %1$s</string>
+    <string name="pc_toggle">Start from a computer (no Wi-Fi)</string>
+    <string name="pc_hint">Save the Windows file, move it to the computer and double-click it while the phone is connected by USB with USB debugging on. It finds adb, waits for the phone and asks you to press Enter. The app connects to the helper by itself.</string>
+    <string name="pc_save_launcher">Save the Windows file</string>
+    <string name="pc_launcher_saved">MahiRoute-start.bat was saved to the Downloads folder</string>
+    <string name="pc_launcher_failed">Could not save the file</string>
+    <string name="pc_manual_hint">Or run the command on the computer by hand:</string>
+    <string name="pc_copy">Copy</string>
+    <string name="pc_connect">Connect now</string>
+    <string name="helper_step_preparing">Preparing…</string>
+    <string name="helper_step_finding">Looking for wireless debugging…</string>
+    <string name="helper_step_debugging">Turn on \"Wireless debugging\" in Developer options. The start continues by itself.</string>
+    <string name="helper_step_confirm">If Android asks, allow wireless debugging on this network. Waiting for your answer…</string>
+    <string name="helper_step_starting">Starting the helper…</string>
+    <string name="helper_step_dialog">Waiting for the pairing dialog…</string>
+    <string name="helper_step_pairing">Pairing…</string>
+    <string name="pair_title">Pair MahiRoute with this phone</string>
+    <string name="pair_instructions">1. Open Developer options → Wireless debugging.
+2. Tap “Pair device with pairing code”.
+3. Type the six digits shown there below, or in the notification. This is needed only once.</string>
+    <string name="pair_code_hint">Pairing code</string>
+    <string name="pair_submit">Pair</string>
+    <string name="pair_open_settings">Open Developer options</string>
+    <string name="pair_wrong_code">That code did not work. Check the digits in the dialog and try again.</string>
+    <string name="pair_dialog_missing">The pairing dialog was not found. Keep it open while pairing.</string>
+    <string name="problem_no_wifi">Connect to Wi-Fi first: wireless debugging works only on Wi-Fi. The network does not need internet access, any network will do, even one without a route to the internet. Wi-Fi is needed just to start the helper.</string>
+    <string name="problem_debugging_off">Turn on Wireless debugging in Developer options, then try again.</string>
+    <string name="problem_not_found">Wireless debugging did not show up. Make sure it is on, the phone is connected to Wi-Fi (no internet needed) and you allowed debugging on this network when Android asked.</string>
+    <string name="problem_unreachable">The wireless debugging service did not answer.</string>
+    <string name="problem_other">The helper could not be started.</string>
+    <string name="notif_pair_title">Enter the pairing code</string>
+    <string name="notif_pair_text">Type the six digits from the wireless debugging dialog.</string>
+    <string name="notif_pair_action">Enter code</string>
+
+    <!-- Settings -->
+    <string name="setting_boot_title">Start after a restart</string>
+    <string name="setting_boot_hint_on">After the phone restarts, MahiRoute brings your chosen devices back by itself.</string>
+    <string name="setting_boot_hint_off">After a restart MahiRoute does nothing until you open the app.</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
+    <!-- Diagnostics -->
+    <string name="diag_title">Diagnostics</string>
+    <string name="diag_helper">Helper</string>
+    <string name="diag_firmware">Android %1$s (API %2$d)</string>
+    <string name="diag_link_ready">Running</string>
+    <string name="diag_link_connecting">Connecting</string>
+    <string name="diag_link_disconnected">Not started</string>
+    <string name="diag_link_failed">Failed: %1$s</string>
+    <string name="diag_capabilities">How this firmware behaves</string>
+    <string name="diag_capture_preset">Microphone preference</string>
+    <string name="diag_output_strategy">Output preference</string>
+    <string name="support_unknown">not measured yet</string>
+    <string name="support_honored">honored</string>
+    <string name="support_ignored">ignored, devices are hidden instead</string>
+    <string name="diag_streams">Active audio streams</string>
+    <string name="diag_no_streams">No app is recording or playing right now</string>
+    <string name="diag_devices">Connected devices</string>
+    <string name="diag_warnings">Recent problems</string>
+    <string name="diag_recalibrate">Measure again</string>
+    <string name="stream_record">Recording</string>
+    <string name="stream_playback">Playback</string>
+    <string name="stream_to">→ %1$s</string>
+    <string name="stream_unknown_device">device unknown</string>
+    <string name="mode_normal">normal</string>
+    <string name="mode_ringtone">ringtone</string>
+    <string name="mode_call">call</string>
+    <string name="mode_communication">voice or video chat</string>
+    <string name="diag_mode">Audio mode: %1$s</string>
+    <string name="uid_unknown">unknown app</string>
+
+    <!-- Permissions -->
+    <string name="perm_title">Permission needed</string>
+    <string name="perm_notifications">MahiRoute shows a notification while it controls the sound and tells you when a chosen device disconnects.</string>
+    <string name="perm_bluetooth">Bluetooth access lets MahiRoute list your Bluetooth headsets and notice when they connect.</string>
+    <string name="perm_battery">Android may stop MahiRoute in the background. Allow unrestricted battery use so routing keeps working.</string>
+    <string name="perm_grant">Allow</string>
+    <string name="perm_open_settings">Open settings</string>
+    <string name="perm_later">Not now</string>
+
+    <!-- Notifications -->
+    <string name="channel_status">Status</string>
+    <string name="channel_alerts">Device alerts</string>
+    <string name="notif_status_title">MahiRoute is controlling the sound</string>
+    <string name="notif_status_text">Microphone: %1$s · Output: %2$s</string>
+    <string name="notif_action_off">Turn off</string>
+    <string name="notif_missing_title">Chosen device disconnected</string>
+    <string name="notif_missing_text">Android uses its own choice for the %1$s until it is back.</string>
+    <string name="notif_restored_title">Chosen device is back</string>
+    <string name="notif_restored_text">MahiRoute applied your %1$s choice again.</string>
+    <string name="notif_helper_lost_title">Helper stopped</string>
+    <string name="notif_helper_lost_text">Open MahiRoute to start it again; until then Android picks the devices.</string>
+    <string name="direction_input">microphone</string>
+    <string name="direction_output">sound output</string>
+    <string name="tile_label">Routing</string>
+
+    <!-- Device kinds -->
+    <string name="kind_builtin_earpiece">Phone earpiece</string>
+    <string name="kind_builtin_speaker">Phone speaker</string>
+    <string name="kind_builtin_speaker_safe">Phone speaker (protected)</string>
+    <string name="kind_builtin_mic">Built-in microphone</string>
+    <string name="kind_wired_headset">Wired headset</string>
+    <string name="kind_wired_headphones">Wired headphones</string>
+    <string name="kind_line_analog">Analog line</string>
+    <string name="kind_line_digital">Digital line</string>
+    <string name="kind_usb_headset">USB headset</string>
+    <string name="kind_usb_device">USB audio device</string>
+    <string name="kind_usb_accessory">USB accessory</string>
+    <string name="kind_bluetooth_sco">Bluetooth headset (calls)</string>
+    <string name="kind_bluetooth_a2dp">Bluetooth headphones</string>
+    <string name="kind_ble_headset">Bluetooth LE headset</string>
+    <string name="kind_ble_speaker">Bluetooth LE speaker</string>
+    <string name="kind_ble_broadcast">Bluetooth LE broadcast</string>
+    <string name="kind_hearing_aid">Hearing aid</string>
+    <string name="kind_hdmi">HDMI</string>
+    <string name="kind_dock">Dock</string>
+    <string name="kind_aux_line">Aux line</string>
+    <string name="kind_virtual">System port</string>
+    <string name="position_bottom">bottom</string>
+    <string name="position_back">back</string>
+    <string name="position_front">front</string>
+    <string name="position_top">top</string>
+    <string name="device_with_detail">%1$s · %2$s</string>
+</resources>
