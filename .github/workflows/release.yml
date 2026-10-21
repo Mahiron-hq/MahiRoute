@@ -103,7 +103,7 @@ jobs:
           name: release-packages
           path: dist
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: dist/*.apk
       - name: Release notes from the changelog
