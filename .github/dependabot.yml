@@ -8,6 +8,10 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # These releases need Android Gradle plugin 9.1 or newer; remove the entries when the plugin is upgraded.
+      - dependency-name: "androidx.compose:compose-bom"
+      - dependency-name: "androidx.core:core-ktx"
   - package-ecosystem: cargo
     directory: /rust
     schedule:
