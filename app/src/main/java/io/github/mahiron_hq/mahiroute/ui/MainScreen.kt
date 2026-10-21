@@ -279,9 +279,9 @@ private fun StartContent(state: UiModel, bootstrap: BootstrapState, actions: Mai
     val failed = bootstrap as? BootstrapState.Failed
     val problem = failed?.problem
     when {
-        problem != null -> {
-            Text(problemText(problem), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error)
-            failed?.detail?.takeIf { problem == Problem.Other || problem == Problem.Unreachable }?.let {
+        failed != null -> {
+            Text(problemText(failed.problem), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error)
+            failed.detail?.takeIf { problem == Problem.Other || problem == Problem.Unreachable }?.let {
                 Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
