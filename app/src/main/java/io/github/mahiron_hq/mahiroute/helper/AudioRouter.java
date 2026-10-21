@@ -13,6 +13,7 @@ import android.media.AudioManager;
 import android.media.AudioPlaybackConfiguration;
 import android.media.AudioRecordingConfiguration;
 import android.os.Build;
+import android.os.SystemClock;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -37,6 +38,8 @@ final class AudioRouter {
     private static final int CONNECTION_UNAVAILABLE = 0;
     private static final int CONNECTION_AVAILABLE = 1;
     private static final long MASKED_PORT_BASE = 0x80000000L;
+    private static final long DEACTIVATED_PORT_BASE = 0xC0000000L;
+    private static final long ACTIVATION_WAIT_MS = 3000;
     private static final int ALL_DEVICES = AudioManager.GET_DEVICES_INPUTS | AudioManager.GET_DEVICES_OUTPUTS;
 
     private final AudioManager audio;
@@ -52,6 +55,7 @@ final class AudioRouter {
     private final Method getStrategyPreferred;
     private final Method removeStrategyPreferred;
     private final Method setConnectionState;
+    private final BluetoothSink bluetooth;
     private final List<Object> strategies = new ArrayList<>();
 
 
@@ -59,6 +63,7 @@ final class AudioRouter {
         this.audio = audio;
         this.shellContext = new ShellContext(context);
         this.state = state;
+        this.bluetooth = BluetoothSink.open(shellContext);
         Class<?> attributes = Class.forName("android.media.AudioDeviceAttributes");
         attributesConstructor = attributes.getConstructor(int.class, int.class, String.class);
         attributesType = attributes.getMethod("getType");
@@ -108,7 +113,40 @@ final class AudioRouter {
             }
             index++;
         }
+        index = 0;
+        for (BluetoothSink.Headphones headphones : deactivatedBluetooth()) {
+            DeviceSpec spec = new DeviceSpec(false, AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, headphones.address);
+            // Listed as hidden: the link is up, but Android does not offer the device until it is activated.
+            result.put(deviceJson(DEACTIVATED_PORT_BASE + index++, spec, headphones.name, true));
+        }
         return result;
+    }
+
+    /** Connected Bluetooth headphones the audio framework does not list right now. */
+    private List<BluetoothSink.Headphones> deactivatedBluetooth() {
+        List<BluetoothSink.Headphones> result = new ArrayList<>();
+        if (bluetooth == null) {
+            return result;
+        }
+        for (BluetoothSink.Headphones headphones : bluetooth.connected()) {
+            DeviceSpec spec = new DeviceSpec(false, AudioDeviceInfo.TYPE_BLUETOOTH_A2DP, headphones.address);
+            if (find(spec) == null) {
+                result.add(headphones);
+            }
+        }
+        return result;
+    }
+
+    /** Asks the Bluetooth stack to activate the headphones and waits until the framework lists them. */
+    private void activateBluetooth(DeviceSpec spec, List<String> warnings) {
+        if (bluetooth == null || !bluetooth.activate(spec.address)) {
+            warnings.add("cannot activate Bluetooth device " + spec);
+            return;
+        }
+        long deadline = SystemClock.elapsedRealtime() + ACTIVATION_WAIT_MS;
+        while (find(spec) == null && SystemClock.elapsedRealtime() < deadline) {
+            SystemClock.sleep(100);
+        }
     }
 
     /** Converges to the desired state; returns the problems met on the way. */
@@ -278,6 +316,9 @@ final class AudioRouter {
                 state.setOutput(null);
                 return;
             }
+            if (find(want) == null && want.type == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP) {
+                activateBluetooth(want, warnings);
+            }
             if (find(want) == null) {
                 warnings.add("output device not visible: " + want);
                 return;
@@ -298,7 +339,10 @@ final class AudioRouter {
     private void mask(DeviceSpec spec, List<String> warnings) {
         AudioDeviceInfo device = find(spec);
         if (device == null) {
-            warnings.add("cannot hide a device that is not visible: " + spec);
+            // Deactivated Bluetooth headphones are already out of the policy, so there is nothing to hide.
+            if (spec.type != AudioDeviceInfo.TYPE_BLUETOOTH_A2DP) {
+                warnings.add("cannot hide a device that is not visible: " + spec);
+            }
             return;
         }
         // Persist first: a crash between the call and the write must not leak a hidden device.

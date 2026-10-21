@@ -4,6 +4,18 @@ All notable changes to MahiRoute are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-10-21
+
+### Fixed
+
+- Bluetooth headphones disappeared from the app, and could not be chosen, when a wired headset was plugged in while they were connected: Android deactivates the active Bluetooth device in that case and stops listing it. They now stay in the list and choosing them activates the connection again.
+- The continuous integration build failed because the Gradle wrapper script was not marked executable.
+
+### Changed
+
+- The diagnostics note for a device Android does not currently offer is worded neutrally.
+- The README no longer carries build instructions and lists Bluetooth, USB DAC and wired-headphone checks in the tested table.
+
 ## [1.0.0] - 2026-10-21
 
 First public release.

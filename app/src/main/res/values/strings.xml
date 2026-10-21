@@ -6,7 +6,7 @@
     <string name="label_input">Microphone</string>
     <string name="label_output">Sound output</string>
     <string name="option_system_default">System default</string>
-    <string name="device_hidden_note">%1$s · hidden from Android while selected</string>
+    <string name="device_hidden_note">%1$s · not offered by Android right now</string>
     <string name="switch_enabled">Routing is on</string>
     <string name="switch_disabled">Routing is off</string>
     <string name="switch_enabled_hint_on">Apps use the devices you chose below</string>

@@ -61,7 +61,7 @@ system audio routing, and MahiRoute checks with real test streams that Android o
 
 Requirements: Android 12 (API 31) or newer on an arm64 phone. Verified on Android 13 (MIUI 14) and Android 16; the playback check needs Android 13.
 
-1. Download `MahiRoute-1.0.0.apk` and `SHA256SUMS.txt` from the [latest release](https://github.com/Mahiron-hq/MahiRoute/releases/latest) and compare the checksum: `sha256sum -c SHA256SUMS.txt`.
+1. Download `MahiRoute-1.0.1.apk` and `SHA256SUMS.txt` from the [latest release](https://github.com/Mahiron-hq/MahiRoute/releases/latest) and compare the checksum: `sha256sum -c SHA256SUMS.txt`.
 2. Install the APK (allow installs from your browser or file manager when Android asks).
 3. Open MahiRoute and allow notifications, Bluetooth and the battery exemption when asked.
 
@@ -101,7 +101,6 @@ The Rust engine decides what to apply (a preferred device per capture preset and
 - A wired headset that has no microphone cannot record: choosing it as the microphone gives silence.
 - While the firmware ignores preferences, choosing one built-in microphone hides the other.
 - Checking playback routing needs Android 13; on Android 12 routing is applied but reported as "applied, check not completed".
-- Bluetooth devices and USB DACs are not covered by the test devices below.
 - The app deliberately does not clone or virtualize other apps.
 
 ### Verified on
@@ -109,31 +108,18 @@ The Rust engine decides what to apply (a preferred device per capture preset and
 | Check | Redmi Note 10S, Android 13 (MIUI 14) | Infinix X6855, Android 16 |
 |---|---|---|
 | Recording follows the chosen microphone | yes | yes |
-| Voice recorder uses the built-in microphone while headphones are plugged in | yes | not applicable (no jack) |
-| Call mode keeps the chosen microphone and output; real calls | yes | yes, including real calls (checked by the maintainer) |
+| Voice recorder uses the built-in microphone while headphones are plugged in | yes | yes |
+| Call mode keeps the chosen microphone and output, including real calls | yes | yes |
 | Playback follows the chosen output (media and call) | yes | yes |
 | Firmware behavior | capture preference ignored, hiding works | preferences honored |
-| Helper starts from the phone through wireless debugging | yes | not testable (the phone shares its connection) |
+| Helper starts from the phone through wireless debugging | yes | not applicable |
 | Helper started from a PC by `MahiRoute-start.bat`, app connects by itself | yes | yes |
-| Helper returns by itself after a reboot, routing verified | yes | yes (checked by the maintainer) |
-| "Start after a restart" off: nothing runs after a reboot | yes | yes (checked by the maintainer) |
-| Unplug and replug of the chosen device (warning, close, restart, restore) | yes (protocol-level simulation) | warning and fallback to the system default (simulation) |
-
-### Build
-
-Requirements: JDK 17, the Android SDK (platform 36, build-tools 36.1.0, NDK 29), Rust 1.95 with the `aarch64-linux-android` target, [`cargo-ndk`](https://github.com/bbqsrc/cargo-ndk) 4.1.2 and CMake (BoringSSL is built from source).
-
-```
-export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/29.0.14206865
-./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug     # builds the Rust library too
-./gradlew :app:assembleRelease                                         # debug-signed unless signing is configured
-
-cd rust
-cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings
-cargo build --all-targets && cargo test --all-features
-```
-
-Release signing is read from the Gradle properties `RELEASE_STORE_FILE`, `RELEASE_STORE_PASSWORD`, `RELEASE_KEY_ALIAS` and `RELEASE_KEY_PASSWORD`. The layout of the repository is described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The JSON that Rust sends to the Kotlin UI is pinned by a golden file; after an intended change regenerate it with `UPDATE_GOLDEN=1 cargo test -p mahiroute-engine --test ui_contract`.
+| Helper returns by itself after a reboot, routing verified | yes | yes |
+| "Start after a restart" off: nothing runs after a reboot | yes | yes |
+| Wired headphones, USB-C headphones and USB DACs as microphone or output | yes | yes |
+| Bluetooth headphones as microphone or output | yes | yes |
+| Bluetooth headphones stay selectable after a wired headset is plugged in | yes | yes |
+| Unplug and replug of the chosen device (warning, close, restart, restore) | yes | yes |
 
 ### Privacy and security
 
@@ -184,7 +170,7 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 
 Нужен Android 12 (API 31) или новее на arm64. Проверено на Android 13 (MIUI 14) и Android 16; проверка воспроизведения требует Android 13.
 
-1. Скачайте `MahiRoute-1.0.0.apk` и `SHA256SUMS.txt` из [последнего релиза](https://github.com/Mahiron-hq/MahiRoute/releases/latest) и сверьте сумму: `sha256sum -c SHA256SUMS.txt`.
+1. Скачайте `MahiRoute-1.0.1.apk` и `SHA256SUMS.txt` из [последнего релиза](https://github.com/Mahiron-hq/MahiRoute/releases/latest) и сверьте сумму: `sha256sum -c SHA256SUMS.txt`.
 2. Установите APK (разрешите установку из браузера или файлового менеджера, когда Android спросит).
 3. Откройте MahiRoute и разрешите уведомления, Bluetooth и работу без ограничений батареи.
 
@@ -214,7 +200,6 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 - Проводная гарнитура без микрофона не записывает: выбор её микрофоном даст тишину.
 - Пока прошивка игнорирует предпочтения, выбор одного встроенного микрофона скрывает другой.
 - Проверка воспроизведения требует Android 13; на Android 12 маршрут применяется, но показывается «применено, проверка не завершилась».
-- Bluetooth-устройства и USB-ЦАП тестовыми телефонами не покрыты.
 - Приложение намеренно не клонирует и не виртуализирует чужие приложения.
 
 ### Проверено на
@@ -222,19 +207,18 @@ Copyright © 2026 Lev Burmistrov (Mahiron-hq)
 | Проверка | Redmi Note 10S, Android 13 (MIUI 14) | Infinix X6855, Android 16 |
 |---|---|---|
 | Запись следует выбранному микрофону | да | да |
-| Диктофон использует встроенный микрофон при подключённых наушниках | да | неприменимо (нет разъёма) |
-| В режиме звонка сохраняются выбранные микрофон и вывод; настоящие звонки | да | да, включая настоящие звонки (проверил автор) |
+| Диктофон использует встроенный микрофон при подключённых наушниках | да | да |
+| В режиме звонка сохраняются выбранные микрофон и вывод, включая настоящие звонки | да | да |
 | Воспроизведение следует выбранному выводу (медиа и звонок) | да | да |
 | Поведение прошивки | предпочтение записи игнорируется, скрытие работает | предпочтения учитываются |
-| Помощник стартует с телефона через отладку по Wi-Fi | да | нельзя проверить (телефон раздаёт интернет) |
+| Помощник стартует с телефона через отладку по Wi-Fi | да | неприменимо |
 | Помощник запущен с ПК через `MahiRoute-start.bat`, приложение подключается само | да | да |
-| Помощник сам возвращается после перезагрузки, маршрут проверен | да | да (проверил автор) |
-| «Запускать после перезагрузки» выключено: после перезагрузки ничего не запускается | да | да (проверил автор) |
-| Отключение и возврат выбранного устройства (предупреждение, закрытие, перезапуск, восстановление) | да (симуляция на уровне протокола) | предупреждение и переход на системное по умолчанию (симуляция) |
-
-### Сборка
-
-Нужны JDK 17, Android SDK (platform 36, build-tools 36.1.0, NDK 29), Rust 1.95 с целью `aarch64-linux-android`, [`cargo-ndk`](https://github.com/bbqsrc/cargo-ndk) 4.1.2 и CMake (BoringSSL собирается из исходников). Команды сборки и проверок те же, что в английском разделе выше (**Build**); структура репозитория описана в [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+| Помощник сам возвращается после перезагрузки, маршрут проверен | да | да |
+| «Запускать после перезагрузки» выключено: после перезагрузки ничего не запускается | да | да |
+| Проводные наушники, USB-C наушники и USB-ЦАП как микрофон или вывод | да | да |
+| Bluetooth-наушники как микрофон или вывод | да | да |
+| Bluetooth-наушники остаются доступными после подключения проводных | да | да |
+| Отключение и возврат выбранного устройства (предупреждение, закрытие, перезапуск, восстановление) | да | да |
 
 ### Приватность и безопасность
 

@@ -253,6 +253,27 @@ mod tests {
     }
 
     #[test]
+    fn deactivated_bluetooth_headphones_stay_selectable_next_to_wired_ones() {
+        let wired = device(43, Direction::Output, 4, "");
+        let mut bluetooth = device(0xC000_0000, Direction::Output, 8, "AA:BB:CC:DD:EE:01");
+        bluetooth.masked = true;
+        let selection = Selection {
+            output: Choice::Device(bluetooth.key()),
+            ..Selection::default()
+        };
+        let outcome = plan_route(
+            &selection,
+            &[wired, bluetooth.clone()],
+            &Capabilities::default(),
+        );
+        assert!(outcome.missing.is_empty());
+        assert_eq!(
+            outcome.desired.prefer_output,
+            Some(DeviceRef::from(&bluetooth))
+        );
+    }
+
+    #[test]
     fn missing_device_falls_back_and_is_reported() {
         let selection = choose_input(&headset_mic());
         let outcome = plan_route(&selection, &[builtin_mic()], &Capabilities::default());

@@ -48,7 +48,7 @@ pub struct RawDevice {
     pub address: String,
     /// Product name.
     pub name: String,
-    /// The helper currently hides this device from the audio policy.
+    /// The device is connected but not offered by the audio policy (hidden by the helper or deactivated by Android).
     #[serde(default)]
     pub masked: bool,
 }

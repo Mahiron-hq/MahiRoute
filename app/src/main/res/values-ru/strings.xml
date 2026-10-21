@@ -6,7 +6,7 @@
     <string name="label_input">Микрофон</string>
     <string name="label_output">Вывод звука</string>
     <string name="option_system_default">Системное по умолчанию</string>
-    <string name="device_hidden_note">%1$s · скрыто от Android, пока выбрано другое</string>
+    <string name="device_hidden_note">%1$s · сейчас не предлагается Android</string>
     <string name="switch_enabled">Маршрутизация включена</string>
     <string name="switch_disabled">Маршрутизация выключена</string>
     <string name="switch_enabled_hint_on">Приложения используют выбранные ниже устройства</string>

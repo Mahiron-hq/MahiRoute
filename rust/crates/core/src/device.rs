@@ -166,7 +166,8 @@ pub struct Device {
     pub address: String,
     /// Product name reported by the framework.
     pub name: String,
-    /// The device is physically connected but hidden from the audio policy by this app.
+    /// The device is physically connected but the audio policy does not offer it: this app hid it,
+    /// or Android deactivated it (Bluetooth headphones while a wired headset is plugged in).
     pub masked: bool,
 }
 
