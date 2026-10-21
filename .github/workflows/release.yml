@@ -82,7 +82,7 @@ jobs:
           mkdir dist
           cp app/build/outputs/apk/release/app-release.apk "dist/MahiRoute-${{ steps.version.outputs.version }}.apk"
           (cd dist && sha256sum MahiRoute-*.apk > SHA256SUMS.txt)
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: release-packages
           path: dist/*
