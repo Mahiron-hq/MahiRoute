@@ -8,6 +8,8 @@ name: Release
 #
 # Secrets used by the build job: RELEASE_KEYSTORE_BASE64 (the keystore, base64-encoded),
 # RELEASE_STORE_PASSWORD, RELEASE_KEY_ALIAS and RELEASE_KEY_PASSWORD.
+# The build and publish jobs stay skipped until the repository variable RELEASE_SIGNING is set
+# to "true", which is done once the secrets exist; until then releases are uploaded by hand.
 
 on:
   push:
@@ -29,6 +31,7 @@ jobs:
   build:
     name: Signed APK
     needs: tests
+    if: ${{ vars.RELEASE_SIGNING == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     environment: release
